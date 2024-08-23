@@ -4,6 +4,7 @@ using C__EF_S01_Assignment.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace C__EF_S01_Assignment.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240823184354_Update All Classes")]
+    partial class UpdateAllClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,37 +24,6 @@ namespace C__EF_S01_Assignment.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("C__EF_S01_Assignment.Entities.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime>("Duration")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Top_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
-                });
 
             modelBuilder.Entity("C__EF_S01_Assignment.Entities.Course_Instructor", b =>
                 {
@@ -68,7 +40,7 @@ namespace C__EF_S01_Assignment.Migrations
 
                     b.HasKey("Course_Id", "Inst_Id");
 
-                    b.ToTable("Course_Instructors");
+                    b.ToTable("Course_Instructor");
                 });
 
             modelBuilder.Entity("C__EF_S01_Assignment.Entities.Department", b =>
@@ -88,7 +60,7 @@ namespace C__EF_S01_Assignment.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -150,24 +122,6 @@ namespace C__EF_S01_Assignment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("C__EF_S01_Assignment.Entities.Student_Course", b =>
-                {
-                    b.Property<int>("Course_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Student_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Grade")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("Grade");
-
-                    b.HasKey("Course_Id", "Student_Id");
-
-                    b.ToTable("Student_Courses");
                 });
 
             modelBuilder.Entity("C__EF_S01_Assignment.Entities.Topic", b =>

@@ -1,4 +1,5 @@
-﻿using C__EF_S01_Assignment.Entities;
+﻿using C__EF_S01_Assignment.Configuration;
+using C__EF_S01_Assignment.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,44 @@ namespace C__EF_S01_Assignment.Contexts
     public class ITIDbContext:DbContext
     {
 
+        #region By Fluent API
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration<Course>(new ICourseConfiguration());
+
+
+            // Course Instructor Class
+            modelBuilder.Entity<Course_Instructor>(CI =>
+            {
+
+                CI.HasKey(ci =>new {ci.Course_Id,ci.Inst_Id  });//Primary Key Is Called Id
+
+               CI.Property(nameof(Course_Instructor.Evaluate))
+                .HasColumnName("Evaluation")
+                .HasColumnType("varchar(200)")
+                .IsRequired();
+
+
+
+            });
+
+            //Student Course Class
+            modelBuilder.Entity<Student_Course>(SC =>
+            {
+
+                SC.HasKey(SC => new { SC.Course_Id, SC.Student_Id });//Primary Key Is Called Id
+
+                SC.Property(nameof(Student_Course.Grade))
+                 .HasColumnName("Grade")
+                 .HasColumnType("varchar(200)")
+                 .IsRequired();
+
+
+
+            });
+        }
+
+        #endregion
         #region Convention And Annotation
         public ITIDbContext() : base()
         {
@@ -22,9 +61,16 @@ namespace C__EF_S01_Assignment.Contexts
         }
         public DbSet<Student> Students { get; set; }//Become Table IN Database Named==>Students
         public DbSet<Instructor> Instructors { get; set; }//Become Table IN Database Named==>Instructors
+        public DbSet<Department> Departments { get; set; }//Become Table IN Database Named==>Departments
         public DbSet<Topic> Topics { get; set; }//Become Table IN Database Named==>Topics
+        public DbSet<Student_Course> Student_Courses { get; set; }//Become Table IN Database Named==>Student_Courses
+        public DbSet<Course_Instructor> Course_Instructors { get; set; }//Become Table IN Database Named==>Course_Instructors
+        public DbSet<Course> Courses { get; set; }//Become Table IN Database Named==>Courses
+
 
 
         #endregion
+
+
     }
 }
