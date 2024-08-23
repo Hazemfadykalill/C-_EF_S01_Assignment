@@ -13,18 +13,17 @@ namespace C__EF_S01_Assignment.Entities
 
         #region Annotation
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
-        [Column("TopicName")]
         public string Name { get; set; }
 
-        [ForeignKey("Ins_Id")]
+        [Required]
         public int Ins_Id { get; set; }
-        [Column(TypeName = "HiringDate")]
-        [DataType(DataType.Date)]
+
+        [Required]
+        [Column(TypeName = "datetime")]
         public DateTime HiringDate { get; set; }
 
         #endregion

@@ -17,7 +17,7 @@ namespace C__EF_S01_Assignment.Entities
 
         [Required]
         [MaxLength(50)]
-        [Column("TopicName")]
+     
         public string Name { get; set; }
         #endregion
     }

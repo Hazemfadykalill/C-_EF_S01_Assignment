@@ -4,6 +4,7 @@ using C__EF_S01_Assignment.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace C__EF_S01_Assignment.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240823184354_Update All Classes")]
+    partial class UpdateAllClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,24 +122,6 @@ namespace C__EF_S01_Assignment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("C__EF_S01_Assignment.Entities.Student_Course", b =>
-                {
-                    b.Property<int>("Course_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Student_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Grade")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("Grade");
-
-                    b.HasKey("Course_Id", "Student_Id");
-
-                    b.ToTable("Student_Course");
                 });
 
             modelBuilder.Entity("C__EF_S01_Assignment.Entities.Topic", b =>

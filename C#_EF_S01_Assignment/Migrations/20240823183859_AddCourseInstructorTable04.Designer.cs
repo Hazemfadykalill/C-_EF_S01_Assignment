@@ -4,6 +4,7 @@ using C__EF_S01_Assignment.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace C__EF_S01_Assignment.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240823183859_AddCourseInstructorTable04")]
+    partial class AddCourseInstructorTable04
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +52,7 @@ namespace C__EF_S01_Assignment.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("HiringDate")
-                        .HasColumnType("datetime");
+                        .HasColumnType("HiringDate");
 
                     b.Property<int>("Ins_Id")
                         .HasColumnType("int");
@@ -57,7 +60,8 @@ namespace C__EF_S01_Assignment.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("TopicName");
 
                     b.HasKey("Id");
 
@@ -121,24 +125,6 @@ namespace C__EF_S01_Assignment.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("C__EF_S01_Assignment.Entities.Student_Course", b =>
-                {
-                    b.Property<int>("Course_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Student_Id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Grade")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("Grade");
-
-                    b.HasKey("Course_Id", "Student_Id");
-
-                    b.ToTable("Student_Course");
-                });
-
             modelBuilder.Entity("C__EF_S01_Assignment.Entities.Topic", b =>
                 {
                     b.Property<int>("Id")
@@ -150,7 +136,8 @@ namespace C__EF_S01_Assignment.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("TopicName");
 
                     b.HasKey("Id");
 
