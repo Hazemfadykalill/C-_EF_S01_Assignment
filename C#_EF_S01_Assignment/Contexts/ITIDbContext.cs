@@ -1,4 +1,5 @@
-﻿using C__EF_S01_Assignment.Entities;
+﻿using C__EF_S01_Assignment.Configuration;
+using C__EF_S01_Assignment.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace C__EF_S01_Assignment.Contexts
         #region By Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration<Course>(new ICourseConfiguration());
 
 
             // Course Instructor Class
@@ -59,10 +61,16 @@ namespace C__EF_S01_Assignment.Contexts
         }
         public DbSet<Student> Students { get; set; }//Become Table IN Database Named==>Students
         public DbSet<Instructor> Instructors { get; set; }//Become Table IN Database Named==>Instructors
-        public DbSet<Department> Departments { get; set; }//Become Table IN Database Named==>Topics
+        public DbSet<Department> Departments { get; set; }//Become Table IN Database Named==>Departments
         public DbSet<Topic> Topics { get; set; }//Become Table IN Database Named==>Topics
+        public DbSet<Student_Course> Student_Courses { get; set; }//Become Table IN Database Named==>Student_Courses
+        public DbSet<Course_Instructor> Course_Instructors { get; set; }//Become Table IN Database Named==>Course_Instructors
+        public DbSet<Course> Courses { get; set; }//Become Table IN Database Named==>Courses
+
 
 
         #endregion
+
+
     }
 }

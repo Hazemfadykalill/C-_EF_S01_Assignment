@@ -13,10 +13,13 @@ namespace C__EF_S01_Assignment.Entities
 
         #region Annotation
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [Column(TypeName = "varchar")]
+        //[MaxLength(50)]
+        [StringLength(50, MinimumLength = 10)]
         public string Name { get; set; }
 
         [Required]
@@ -25,6 +28,13 @@ namespace C__EF_S01_Assignment.Entities
         [Required]
         [Column(TypeName = "datetime")]
         public DateTime HiringDate { get; set; }
+
+
+
+    
+
+
+
 
         #endregion
     }
